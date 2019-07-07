@@ -1,49 +1,44 @@
-rl = require('readline');
+readline = require('readline');
 
-var prompt = rl.createInterface(process.stdin, process.stdout);
+rl = readline.createInterface(process.stdin, process.stdout);
 
 memoria=[0,0,0,0];
 
 function recursiva(){
-	prompt.question("Qual processo deseja executar (entre A e B), digite 0 para sair: ",function(resposta){
-		if(resposta == "A"){
-			base=0;
-			limite=2;
+	rl.question("Qual processo deseja executar (entre A e B), digite 0 para sair: ",function(resposta){
+		rl.setPrompt(`Deseja colocar em que endereço? `);
+		rl.prompt();
+		rl.on('line',function(respostaEnd){
+			if(resposta == "A"){
+				base=0;
+				limite=2;
 
-			for(i=base;i<limite;i++){
-				if(memoria[i]==0){
-					memoria[i]=1;
+				if(respostaEnd>=base && respostaEnd<limite){
+					memoria[respostaEnd]=1;
 					console.log(memoria);
-					resposta==null;
 					recursiva();
-				}
-				if(memoria[limite]==1){
-					console.log("Memória cheia");
-					console.log(memoria);
+				}else{
+					console.log("Endereço inválido");
 					recursiva();
 				}
 			}
-		}
+		})
 
-		else if(resposta == "B"){
-			msg = "Processo B escolhido";
-			console.log(msg);
-			recursiva();
-		}
+			// else if(resposta == "B"){
+			// 	console.log("Processo B escolhido");
+			// 	recursiva();
+			// }
 
-		else if(resposta == "0"){
-			msg = "Inté o/"
-			console.log(msg);
-			process.exit();	
-		}
+			// else if(resposta == "0"){
+			// 	console.log("Inté o/");
+			// 	process.exit();	
+			// }
 
-		else{
-			msg = "Digite um processo válido";
-			console.log(msg);
-			recursiva();
-		}
-
-	})
+			// else{
+			// 	console.log("Digite um processo válido");
+			// 	recursiva();
+			// }
+		})
 }
 recursiva();
 
