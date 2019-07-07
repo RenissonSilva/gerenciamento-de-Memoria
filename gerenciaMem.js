@@ -5,6 +5,7 @@ rl = readline.createInterface(process.stdin, process.stdout);
 memoria=[0,0,0,0];
 
 function recursiva(){
+	console.log(memoria);
 	rl.question("Qual processo deseja executar (entre A e B), digite 0 para sair: ",function(resposta){
 		rl.setPrompt(`Deseja colocar em que endereço? `);
 		rl.prompt();
@@ -15,9 +16,10 @@ function recursiva(){
 
 				if(respostaEnd>=base && respostaEnd<limite){
 					memoria[respostaEnd]=1;
-					console.log(memoria);
+					console.clear();
 					recursiva();
 				}else{
+					console.clear();
 					console.log("Endereço inválido");
 					recursiva();
 				}
@@ -40,7 +42,9 @@ function recursiva(){
 			// }
 		})
 }
+
 recursiva();
+
 
 
 
